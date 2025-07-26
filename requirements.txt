@@ -4,3 +4,4 @@ python-barcode
 Pillow
 psycopg2-binary
 gunicorn
+python-dotenv
