@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+<a href="{{ url_for('add_product') }}" class="btn btn-primary mb-3">➕ Add Product</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Code</th>
+            <th>Barcode</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in products %}
+        <tr>
+            <td>{{ p.name }}</td>
+            <td>{{ p.code }}</td>
+            <td>
+                {% if p.barcode_path %}
+                <img src="{{ url_for('static', filename=p.barcode_path) }}" width="150">
+                {% else %}
+                No barcode
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,18 @@
+<!-- templates/product_info.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Info</title>
+</head>
+<body>
+    <h1>Product Information</h1>
+    <img src="{{ url_for('static', filename=product.barcode_path) }}" alt="Barcode">
+    <p><strong>Name:</strong> {{ product.name }}</p>
+    <p><strong>Code:</strong> {{ product.code }}</p>
+    <p><strong>Description:</strong> {{ product.description }}</p>
+    <p><strong>Telephone:</strong> {{ product.telephone }}</p>
+    <p><strong>Instagram:</strong> <a href="{{ product.instagram }}">{{ product.instagram }}</a></p>
+    <p><strong>Email:</strong> {{ product.email }}</p>
+</body>
+</html>

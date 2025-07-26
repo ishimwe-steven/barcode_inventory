@@ -1,0 +1,5 @@
+Flask
+Flask_SQLAlchemy
+python-barcode
+Pillow
+psycopg2-binary
