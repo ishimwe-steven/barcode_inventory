@@ -4,6 +4,7 @@ from models import Product, User  # Make sure User model is defined with passwor
 import os
 import barcode
 from barcode.writer import ImageWriter
+from flask import flash
 from dotenv import load_dotenv
 from functools import wraps
 
@@ -121,10 +122,35 @@ def login():
 
     return render_template('login.html')
 
+
 @app.route('/logout')
 def logout():
     session.pop('user_id', None)
     return redirect('/login')
+# EDIT PRODUCT
+@app.route('/edit/<int:product_id>', methods=['GET', 'POST'])
+def edit_product(product_id):
+    product = Product.query.get_or_404(product_id)
+    if request.method == 'POST':
+        product.name = request.form['name']
+        product.code = request.form['code']
+        product.description = request.form.get('description')
+        product.telephone = request.form.get('telephone')
+        product.instagram = request.form.get('instagram')
+        product.email = request.form.get('email')
+        db.session.commit()
+        flash('Product updated successfully!', 'success')
+        return redirect(url_for('index'))
+    return render_template('edit_product.html', product=product)
+
+# DELETE PRODUCT
+@app.route('/delete/<int:product_id>', methods=['POST'])
+def delete_product(product_id):
+    product = Product.query.get_or_404(product_id)
+    db.session.delete(product)
+    db.session.commit()
+    flash('Product deleted!', 'success')
+    return redirect(url_for('index'))
 
 
 if __name__ == '__main__':
