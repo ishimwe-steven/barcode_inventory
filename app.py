@@ -77,7 +77,6 @@ def add_product():
     return render_template('add_product.html')
 
 @app.route('/product/<code>')
-@login_required
 def product_info(code):
     product = Product.query.filter_by(code=code).first_or_404()
     return render_template('product_info.html', product=product)
